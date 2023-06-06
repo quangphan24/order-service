@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"order-service/delivery/http/healthcheck"
 	userHandler "order-service/delivery/http/order"
+	middleware2 "order-service/middleware"
 	"order-service/usecase"
 )
 
@@ -41,7 +42,7 @@ func NewHTTPHandler(useCase *usecase.UseCase) *echo.Echo {
 
 	// APIs
 	api := e.Group("/api")
-	userHandler.Init(api.Group("/order"), useCase)
+	userHandler.Init(api.Group("/order", middleware2.VerifyToken), useCase)
 
 	return e
 }
