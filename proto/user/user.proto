@@ -1,0 +1,24 @@
+syntax = "proto3";
+package user;
+option go_package = "order-service/proto/user";
+
+message String {
+  string value = 1;
+}
+
+message User {
+  string id = 1;
+  string  user_name = 2;
+  string password = 4;
+  string email=3;
+}
+message GetUserReq {
+  string id = 1;
+}
+message Amount {
+  int64 value = 1;
+}
+service UserService {
+  rpc GetUser (GetUserReq) returns (User);
+  rpc GetBalance(String) returns (Amount);
+}
